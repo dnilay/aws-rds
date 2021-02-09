@@ -5,6 +5,8 @@ import org.example.service.EmployeeServive;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.sql.DataSource;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -27,7 +29,7 @@ public class App
                 ClassPathXmlApplicationContext context=
                         new ClassPathXmlApplicationContext("applicationContext.xml");
             EmployeeServive employeeServive=context.getBean("employeeService",EmployeeServive.class);
-            String firstName=null;
+           /* String firstName=null;
             String lastName=null;
             String email=null;
             System.out.print("Enter First Name: ");
@@ -37,7 +39,14 @@ public class App
             System.out.print("Enter Email: ");
             email=scanner.next();
             Employee employee=new Employee(new Random().nextInt(1000),firstName,lastName,email);
-            System.out.println(employeeServive.createEmployee(employee));
+            System.out.println(employeeServive.createEmployee(employee));*/
+            List<Employee> employees=employeeServive.getEmployees();
+            Iterator<Employee> iterator=employees.iterator();
+            while(iterator.hasNext())
+            {
+                System.out.println(iterator.next());
+            }
+
 
         }
         catch (Exception e)
