@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="jdbcUrl" value="jdbc:mysql://database-2.c2hwoun3tpnr.ap-southeast-1.rds.amazonaws.com:3306/hr"/>
+        <property name="user" value="admin"/>
+        <property name="password" value="Admin1234"/>
+        <property name="minPoolSize" value="3"/>
+        <property name="maxPoolSize" value="20"/>
+        <property name="maxIdleTime" value="30000"/>
+    </bean>
+    <bean name="employeeDao" class="org.example.dao.EmployeeDaoImpl">
+        <constructor-arg name="dataSource" ref="dataSource"/>
+
+    </bean>
+<bean name="employeeService" class="org.example.service.EmployeeServiceImpl">
+    <constructor-arg name="employeeDao" ref="employeeDao"/>
+</bean>
+</beans>
